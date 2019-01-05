@@ -12,15 +12,15 @@
    "author": "Kevin Muncie (http://kmuncie.com)",
    "license": "MIT",
    "devDependencies": {
-      "autoprefixer": "^7.1.5",
+      "autoprefixer": "^9.4.3",
       "babel-cli": "^6.26.0",
       "babel-preset-env": "^1.6.0",
       "babel-preset-es2015-ie": "^6.7.0",
-      "bulma": "^0.6.0",
+      "bulma": "^0.7.2",
       "cpx": "^1.5.0",
       "node-sass": "^4.5.3",
       "npm-run-all": "^4.1.3",
-      "postcss-cli": "^4.1.1"
+      "postcss-cli": "^6.1.1"
    },
    "scripts": {
       "clean": "rm -rf dist",
