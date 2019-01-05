@@ -25,15 +25,17 @@
    "scripts": {
       "clean": "rm -rf dist",
       "css-deploy": "npm run css-build && npm run css-postcss",
-      "css-build": "node-sass -r --output-style compressed src/scss/collector.scss -o dist/css/",
-      "css-postcss": "postcss --use autoprefixer --output dist/css/style.css dist/css/style.css",
+      "css-build": "node-sass -r --output-style expanded src/scss/collector.scss -o dist/css/",
+      "css-postcss": "postcss 'dist/css/**/*.css' --use autoprefixer --verbose --replace",
       "css-watch": "npm run css-build && npm run css-build -- -wr",
       "js-build": "babel src/js --out-dir dist/js",
       "js-watch": "npm run js-build -- --watch",
-      "html-build": "cpx src/*.html dist -vu",
+      "html-build": "cpx 'src/**/*.html' dist -vu",
       "html-watch": "npm run html-build -- -w",
-      "setup-dist": "mkdir dist/css dist/js -p && touch dist/css/style.css",
-      "develop": "npm run setup-dist && npm-run-all --parallel html-build css-watch js-watch css-postcss",
-      "generate": "npm run clean && npm run setup-dist && npm run html-build && npm run css-deploy && npm run js-build"
+      "assets-copy": "cpx 'src/assets/**/*' dist/assets/ -vu",
+      "assets-watch": "npm run assets-copy -- -w",
+      "setup-dist": "mkdir dist/css dist/js dist/assets -p",
+      "develop": "npm run setup-dist && npm-run-all --parallel assets-watch html-watch css-watch js-watch css-postcss",
+      "generate": "npm run clean && npm run setup-dist && npm run assets-copy && npm run html-build && npm run css-deploy && npm run js-build"
    }
 }
