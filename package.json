@@ -34,7 +34,7 @@
       "html-watch": "npm run html-build -- -w",
       "assets-copy": "cpx 'src/assets/**/*' dist/assets/ -vu",
       "assets-watch": "npm run assets-copy -- -w",
-      "setup-dist": "mkdir dist/css dist/js dist/assets -p",
+      "setup-dist": "mkdir -p dist/css dist/js dist/assets",
       "develop": "npm run setup-dist && npm-run-all --parallel assets-watch html-watch css-watch js-watch css-postcss",
       "generate": "npm run clean && npm run setup-dist && npm run assets-copy && npm run html-build && npm run css-deploy && npm run js-build"
    }
