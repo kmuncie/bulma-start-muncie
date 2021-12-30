@@ -1,6 +1,6 @@
 {
    "name": "bulma-start-muncie",
-   "version": "0.0.1",
+   "version": "1.0.0",
    "description": "Kevin Muncie's start package for Bulma",
    "keywords": [
       "sass",
@@ -9,33 +9,38 @@
       "start",
       "scaffold"
    ],
-   "author": "Kevin Muncie (http://kmuncie.com)",
+   "author": "Kevin Muncie (https://kmuncie.com)",
    "license": "MIT",
-   "devDependencies": {
-      "@babel/cli": "^7.13.16",
-      "@babel/core": "^7.14.0",
-      "autoprefixer": "^9.8.6",
-      "bulma": "^0.8.2",
-      "cpx": "^1.5.0",
-      "node-sass": "^4.14.1",
-      "npm-run-all": "^4.1.3",
-      "postcss": "^8.2.13",
-      "postcss-cli": "^8.3.1"
-   },
+   "browserslist": [
+      "defaults"
+   ],
    "scripts": {
-      "clean": "rm -rf dist",
-      "css-deploy": "npm run css-build && npm run css-postcss",
-      "css-build": "node-sass -r --output-style expanded src/scss/collector.scss -o dist/css/",
-      "css-postcss": "postcss 'dist/css/**/*.css' --use autoprefixer --verbose --replace",
-      "css-watch": "npm run css-build && npm run css-build -- -wr",
-      "js-build": "npx babel src/js --out-dir dist/js",
-      "js-watch": "npm run js-build -- --watch",
-      "html-build": "cpx 'src/**/*.html' dist -vu",
-      "html-watch": "npm run html-build -- -w",
-      "assets-copy": "cpx 'src/assets/**/*' dist/assets/ -vu",
-      "assets-watch": "npm run assets-copy -- -w",
-      "setup-dist": "mkdir -p dist/css dist/js dist/assets",
-      "develop": "npm run setup-dist && npm-run-all --parallel assets-watch html-watch css-watch js-watch css-postcss",
-      "generate": "npm run clean && npm run setup-dist && npm run assets-copy && npm run html-build && npm run css-deploy && npm run js-build"
+      "develop": "concurrently -p \"[{name}]\" -n \"HTTP,HTML,SCSS,JS,IMG\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgRed.bold,bgYellow.bold\" \"npm run http-server\" \"npm run html:watch\" \"npm run scss:watch\" \"npm run js:watch\" \"npm run img:watch\" \"npm run assets:watch\"",
+      "http-server": "http-server -c0 dist",
+      "clean": "rm -rf dist/**/*",
+      "html:copy": "ncp src/html/ dist/",
+      "html:watch": "chokidar src/html -c 'npm run html:copy'",
+      "scss:compile": "sass src/scss:dist/css",
+      "postcss": "postcss dist/css/collector.css -r -m --config postcss.config.js",
+      "scss:watch": "chokidar src/scss -c 'npm run scss:compile && npm run postcss'",
+      "js:copy": "ncp src/js/ dist/js",
+      "js:watch": "chokidar src/js -c 'npm run js:copy'",
+      "img:copy": "ncp src/img/ dist/img",
+      "img:watch": "chokidar src/img -c 'npm run img:copy'",
+      "assets:copy": "ncp src/assets/ dist/assets",
+      "assets:watch": "chokidar src/assets -c 'npm run assets:copy'",
+      "build": "npm run clean && npm run html:copy && npm run js:copy && npm run img:copy && npm run assets:copy && npm run scss:compile && npm run postcss"
+   },
+   "devDependencies": {
+      "@silvermine/postcss-css-var-fallback": "git+https://git@github.com/silvermine/postcss-css-var-fallback#a26ef98a85ee857a4756d64cf673919093ac3ed6",
+      "autoprefixer": "^10.4.0",
+      "chokidar-cli": "^3.0.0",
+      "concurrently": "^6.4.0",
+      "http-server": "^14.0.0",
+      "ncp": "2.0.0",
+      "sass": "^1.45.1",
+      "postcss": "^8.3.11",
+      "postcss-cli": "^9.0.2",
+      "bulma": "^0.9.3"
    }
 }
