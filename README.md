@@ -11,10 +11,7 @@ Check the `package.json` file to see the dependencies and build processes utiliz
 
 - Run `npm install`
 - Run `npm run develop` during development to watch files
-- Run `npm run generate` to generate a clean dist folder ready to upload to the hosting of your choice
-
-In order to view the site locally for development or testing you will need to run a webserver pointing at the `dist` folder. I normally do
-this with [http-server](https://www.npmjs.com/package/http-server).
+- Run `npm run build` to generate a clean build in the dist folder ready to upload to the hosting of your choice
 
 ## Demo
 

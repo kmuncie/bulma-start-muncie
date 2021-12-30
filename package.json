@@ -15,7 +15,7 @@
       "defaults"
    ],
    "scripts": {
-      "develop": "concurrently -p \"[{name}]\" -n \"HTTP,HTML,SCSS,JS,IMG\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgRed.bold,bgYellow.bold\" \"npm run http-server\" \"npm run html:watch\" \"npm run scss:watch\" \"npm run js:watch\" \"npm run img:watch\" \"npm run assets:watch\"",
+      "develop": "npm run build && concurrently -p \"[{name}]\" -n \"HTTP,HTML,SCSS,JS,IMG\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgRed.bold,bgYellow.bold\" \"npm run http-server\" \"npm run html:watch\" \"npm run scss:watch\" \"npm run js:watch\" \"npm run img:watch\" \"npm run assets:watch\"",
       "http-server": "http-server -c0 dist",
       "clean": "rm -rf dist/**/*",
       "html:copy": "ncp src/html/ dist/",
