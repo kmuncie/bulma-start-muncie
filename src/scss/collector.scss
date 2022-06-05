@@ -25,6 +25,6 @@ $primary-invert: $pink-invert;
 
 // 4. Import the rest of Bulma
 */
-$navbar-item-img-max-height: 3rem;
 
-@import "../../node_modules/bulma/bulma.sass";
+@import "../../node_modules/bulma/bulma";
+
